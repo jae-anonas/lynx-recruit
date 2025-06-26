@@ -17,12 +17,12 @@ export default function SurveyorProfile() {
 
     if (!item) {
       item = {
-  name: 'Joel Harrison',
+  name: 'Ben Richardson',
   role: 'Quantity Surveyor',
   type: 'Contractor',
   experience: '8 years',
-  about: 'Experienced quantity surveyor with a strong background in cost estimation, contract administration, and project management. Proven track record in delivering accurate and efficient results.',
-  rate: '$95',
+  about: 'Experienced quantity surveyor with a strong background in cost estimation, contract administration, and project management. Proven track record in delivering accurate and efficient results across New Zealand construction projects.',
+  rate: 'NZ$125',
   image: require('@/assets/images/avatar1.jpg'),
 };
     }

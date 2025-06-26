@@ -7,11 +7,11 @@ import { useSession } from '@/components/SessionProvider';
 export default function UserProfile() {
   const { signOut } = useSession();
   const [userInfo, setUserInfo] = useState({
-    name: 'Alex Rodriguez',
-    email: 'alex.rodriguez@example.com',
-    phone: '+63 912 345 6789',
-    company: 'Rodriguez Construction Co.',
-    location: 'Manila, Philippines',
+    name: 'James Patterson',
+    email: 'james.patterson@example.co.nz',
+    phone: '+64 21 456 789',
+    company: 'Patterson Building Ltd.',
+    location: 'Auckland, New Zealand',
     joinDate: 'January 2024',
     avatar: require('@/assets/images/avatar1.jpg'),
   });
@@ -27,7 +27,7 @@ export default function UserProfile() {
     totalProjects: 15,
     activeProjects: 3,
     completedProjects: 12,
-    totalSpent: '₱12,450,000',
+    totalSpent: 'NZ$2,450,000',
   });
 
   const handleSettingChange = (setting: keyof typeof settings) => {
