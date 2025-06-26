@@ -40,6 +40,7 @@ export default function AdminTabLayout() {
           options={{
             title: 'Admin Dashboard',
             tabBarIcon: ({ color }) => <TabBarIcon name="dashboard" color={color} />,
+            headerShown: true,
             headerRight: () => <DropdownMenu />,
           }}
         />
@@ -48,6 +49,7 @@ export default function AdminTabLayout() {
           options={{
             title: 'Manage Users',
             tabBarIcon: ({ color }) => <TabBarIcon name="users" color={color} />,
+            headerShown: true,
             headerRight: () => <DropdownMenu />,
           }}
         />
@@ -56,6 +58,7 @@ export default function AdminTabLayout() {
           options={{
             title: 'Analytics',
             tabBarIcon: ({ color }) => <TabBarIcon name="bar-chart" color={color} />,
+            headerShown: true,
             headerRight: () => <DropdownMenu />,
           }}
         />
@@ -64,6 +67,7 @@ export default function AdminTabLayout() {
           options={{
             title: 'Settings',
             tabBarIcon: ({ color }) => <TabBarIcon name="cog" color={color} />,
+            headerShown: true,
             headerRight: () => <DropdownMenu />,
           }}
         />

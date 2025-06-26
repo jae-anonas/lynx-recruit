@@ -37,6 +37,7 @@ export default function TabLayout() {
         options={{
           title: 'Dashboard',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          headerShown: true,
           headerRight: () => <DropdownMenu />,
         }}
       />
@@ -45,6 +46,8 @@ export default function TabLayout() {
         options={{
           title: 'Tab Two',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          headerShown: true,
+          headerRight: () => <DropdownMenu />,
         }}
       />
     </Tabs>

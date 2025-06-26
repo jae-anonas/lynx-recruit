@@ -40,6 +40,7 @@ export default function UserTabLayout() {
           options={{
             title: 'Dashboard',
             tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+            headerShown: true,
             headerRight: () => <DropdownMenu />,
           }}
         />
@@ -48,6 +49,7 @@ export default function UserTabLayout() {
           options={{
             title: 'Surveyors',
             tabBarIcon: ({ color }) => <TabBarIcon name="users" color={color} />,
+            headerShown: true,
             headerRight: () => <DropdownMenu />,
           }}
         />
@@ -56,6 +58,7 @@ export default function UserTabLayout() {
           options={{
             title: 'Projects',
             tabBarIcon: ({ color }) => <TabBarIcon name="briefcase" color={color} />,
+            headerShown: true,
             headerRight: () => <DropdownMenu />,
           }}
         />
@@ -64,6 +67,7 @@ export default function UserTabLayout() {
           options={{
             title: 'Profile',
             tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
+            headerShown: true,
             headerRight: () => <DropdownMenu />,
           }}
         />
