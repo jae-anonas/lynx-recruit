@@ -63,6 +63,7 @@ function RootLayoutNav() {
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="(users)" options={{ headerShown: false }} />
           <Stack.Screen name="(admin)" options={{ headerShown: false }} />
+          <Stack.Screen name="(surveyors)" options={{ headerShown: false }} />
           <Stack.Screen name="SurveyorProfile" options={{ title: 'Surveyor Profile' }} />
         </Stack.Protected>
       </Stack>

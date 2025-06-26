@@ -28,8 +28,13 @@ const Index = () => {
   };
 
   const routeUser = (user: UserCredential) => {
-    if (user && user.user.email === 'jae.anonas@gmail.com') {
+    const email = user.user.email?.toLowerCase();
+    
+    if (email === 'jae.anonas@gmail.com') {
       router.replace('/(admin)');
+    } else if (email === 'anonasjae@gmail.com') {
+      // Route specific surveyor users to the surveyors layout
+      router.replace('/(surveyors)' as any);
     } else {
       router.replace('/(users)');
     }
