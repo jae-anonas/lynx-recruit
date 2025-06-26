@@ -34,7 +34,9 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
     try {
       console.log('SessionProvider: Signing out user');
       await auth.signOut();
+      console.log('SessionProvider: Firebase signOut successful');
       setUser(null);
+      console.log('SessionProvider: User state set to null');
     } catch (error) {
       console.error('SessionProvider: Sign out error:', error);
       throw error;
@@ -70,8 +72,11 @@ export function useSessionGuard() {
   const { user, loading } = useSession();
   
   if (loading) {
+    console.log('useSessionGuard: Still loading, returning false');
     return false; // Still loading, don't show protected routes
   }
   
-  return !!user; // Returns true if authenticated, false if not
+  const isAuthenticated = !!user;
+  console.log('useSessionGuard: User authenticated:', isAuthenticated, user ? user.email : 'no user');
+  return isAuthenticated; // Returns true if authenticated, false if not
 }

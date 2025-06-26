@@ -50,15 +50,15 @@ export default function UserProfile() {
             try {
               console.log('Profile logout starting...');
               
-              // Sign out using session context
+              // Sign out using session context - Stack.Protected will handle navigation
               await signOut();
-              console.log('Profile logout successful, navigating to login');
+              console.log('Profile logout successful');
               
-              // Navigate to login - Stack.Protected will handle the rest
-              router.replace('/');
+              // Don't navigate manually - let Stack.Protected handle it
+              // router.replace('/');
               
             } catch (error) {
-              console.error('Logout error:', error);
+              console.error('Profile logout error:', error);
               Alert.alert('Error', 'Failed to sign out. Please try again.');
             }
           },
