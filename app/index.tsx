@@ -30,7 +30,7 @@ const Index = () => {
     if (user && user.user.email === 'jae.anonas@gmail.com') {
       router.replace('/(admin)');
     } else {
-      router.replace('/(tabs)');
+      router.replace('/(users)');
     }
   };
 

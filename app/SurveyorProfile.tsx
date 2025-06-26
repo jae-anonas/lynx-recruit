@@ -23,14 +23,14 @@ export default function SurveyorProfile() {
   experience: '8 years',
   about: 'Experienced quantity surveyor with a strong background in cost estimation, contract administration, and project management. Proven track record in delivering accurate and efficient results.',
   rate: '$95',
-  image: require('../assets/images/avatar1.jpg'),
+  image: require('@/assets/images/avatar1.jpg'),
 };
     }
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Image source={require('../assets/images/avatar1.jpg')} style={styles.avatar} />
+        <Image source={require('@/assets/images/avatar1.jpg')} style={styles.avatar} />
         <Text style={styles.name}>{item.name}</Text>
         <Text style={styles.role}>{item.role}</Text>
         <View style={styles.badge}>
