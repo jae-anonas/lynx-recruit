@@ -1,5 +1,4 @@
-import { StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, Image, Switch, Alert } from 'react-native';
-import { Text, View } from '@/components/Themed';
+import { StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, Image, Switch, Alert, View, Text } from 'react-native';
 import { useState, useEffect } from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { getAuth, signOut } from 'firebase/auth';
@@ -260,6 +259,7 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 20,
+    backgroundColor: 'transparent',
   },
   profileHeader: {
     flexDirection: 'row',
@@ -279,6 +279,7 @@ const styles = StyleSheet.create({
   },
   profileInfo: {
     flex: 1,
+    backgroundColor: 'transparent',
   },
   name: {
     fontSize: 22,
@@ -299,6 +300,7 @@ const styles = StyleSheet.create({
   locationContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'transparent',
   },
   location: {
     fontSize: 12,
@@ -310,6 +312,7 @@ const styles = StyleSheet.create({
   },
   statsSection: {
     marginBottom: 20,
+    backgroundColor: 'transparent',
   },
   sectionTitle: {
     fontSize: 18,
@@ -321,6 +324,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+    backgroundColor: 'transparent',
   },
   statCard: {
     backgroundColor: '#111',
@@ -345,6 +349,7 @@ const styles = StyleSheet.create({
   },
   section: {
     marginBottom: 20,
+    backgroundColor: 'transparent',
   },
   infoContainer: {
     backgroundColor: '#111',
@@ -359,6 +364,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderBottomWidth: 1,
     borderBottomColor: '#333',
+    backgroundColor: 'transparent',
   },
   infoLabel: {
     fontSize: 14,
@@ -383,6 +389,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderBottomWidth: 1,
     borderBottomColor: '#333',
+    backgroundColor: 'transparent',
   },
   settingIcon: {
     width: 40,
@@ -395,6 +402,7 @@ const styles = StyleSheet.create({
   },
   settingContent: {
     flex: 1,
+    backgroundColor: 'transparent',
   },
   settingTitle: {
     fontSize: 16,
@@ -418,6 +426,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderBottomWidth: 1,
     borderBottomColor: '#333',
+    backgroundColor: 'transparent',
   },
   actionIcon: {
     width: 40,
@@ -429,6 +438,7 @@ const styles = StyleSheet.create({
   },
   actionContent: {
     flex: 1,
+    backgroundColor: 'transparent',
   },
   actionTitle: {
     fontSize: 16,

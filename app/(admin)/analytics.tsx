@@ -1,5 +1,4 @@
-import { StyleSheet, SafeAreaView, ScrollView, Dimensions } from 'react-native';
-import { Text, View } from '@/components/Themed';
+import { StyleSheet, SafeAreaView, ScrollView, Dimensions, View, Text } from 'react-native';
 import { useState, useEffect } from 'react';
 
 const { width } = Dimensions.get('window');
@@ -225,9 +224,11 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 20,
+    backgroundColor: 'transparent',
   },
   header: {
     marginBottom: 30,
+    backgroundColor: 'transparent',
   },
   title: {
     fontSize: 28,
@@ -242,11 +243,13 @@ const styles = StyleSheet.create({
   },
   metricsContainer: {
     marginBottom: 30,
+    backgroundColor: 'transparent',
   },
   metricsRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 15,
+    backgroundColor: 'transparent',
   },
   metricCard: {
     backgroundColor: '#111',
@@ -275,6 +278,7 @@ const styles = StyleSheet.create({
   },
   chartSection: {
     marginBottom: 30,
+    backgroundColor: 'transparent',
   },
   sectionTitle: {
     fontSize: 20,
@@ -291,16 +295,19 @@ const styles = StyleSheet.create({
   },
   chartContainer: {
     justifyContent: 'flex-end',
+    backgroundColor: 'transparent',
   },
   barsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'flex-end',
     height: '100%',
+    backgroundColor: 'transparent',
   },
   barGroup: {
     alignItems: 'center',
     flex: 1,
+    backgroundColor: 'transparent',
   },
   bar: {
     backgroundColor: '#00E5FF',
@@ -319,9 +326,11 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderBottomWidth: 1,
     borderBottomColor: '#333',
+    backgroundColor: 'transparent',
   },
   surveyorInfo: {
     flex: 1,
+    backgroundColor: 'transparent',
   },
   surveyorName: {
     fontSize: 16,
@@ -335,6 +344,7 @@ const styles = StyleSheet.create({
   },
   surveyorStats: {
     alignItems: 'flex-end',
+    backgroundColor: 'transparent',
   },
   completedProjects: {
     fontSize: 14,
@@ -343,11 +353,13 @@ const styles = StyleSheet.create({
   },
   progressBarContainer: {
     marginBottom: 15,
+    backgroundColor: 'transparent',
   },
   progressBarHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 5,
+    backgroundColor: 'transparent',
   },
   progressBarLabel: {
     fontSize: 14,
@@ -372,6 +384,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+    backgroundColor: 'transparent',
   },
   revenueItem: {
     width: '48%',

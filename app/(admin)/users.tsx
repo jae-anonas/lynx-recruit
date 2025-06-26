@@ -1,5 +1,4 @@
-import { StyleSheet, TouchableOpacity, SafeAreaView, FlatList, TextInput, Alert } from 'react-native';
-import { Text, View } from '@/components/Themed';
+import { StyleSheet, TouchableOpacity, SafeAreaView, FlatList, TextInput, Alert, View, Text } from 'react-native';
 import { useState, useEffect } from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
@@ -264,6 +263,7 @@ const styles = StyleSheet.create({
   filtersContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    backgroundColor: 'transparent',
   },
   filterButton: {
     paddingHorizontal: 15,
@@ -302,6 +302,7 @@ const styles = StyleSheet.create({
   },
   userInfo: {
     flex: 1,
+    backgroundColor: 'transparent',
   },
   userName: {
     fontSize: 18,
@@ -317,6 +318,7 @@ const styles = StyleSheet.create({
   userTags: {
     flexDirection: 'row',
     marginBottom: 5,
+    backgroundColor: 'transparent',
   },
   roleTag: {
     paddingHorizontal: 8,
@@ -340,6 +342,7 @@ const styles = StyleSheet.create({
   },
   userActions: {
     flexDirection: 'row',
+    backgroundColor: 'transparent',
   },
   actionButton: {
     padding: 10,

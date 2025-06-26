@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
+import { useState, useEffect } from 'react';
+import { StyleSheet, TouchableOpacity, View, Text, Modal, Pressable } from 'react-native';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/firebaseConfig';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
@@ -14,26 +14,37 @@ export default function DropdownMenu() {
     signOut(auth)
       .then(() => {
         alert('Successful logout!');
-        // setMenuVisible(false);
-        // // Redirect to the login page or home page
-        // router.replace('/');
+        setMenuVisible(false);
+        // Redirect to the login page or home page
+        router.replace('/');
       })
       .catch((error) => alert('Error: ' + error.message));
   };
 
   return (
-    <View style={styles.dropdownContainer}>
-      <TouchableOpacity onPress={toggleMenu}>
-        <FontAwesome name="user-circle" size={25} color="#fff" />
-      </TouchableOpacity>
+    <>
+      <View style={styles.dropdownContainer}>
+        <TouchableOpacity onPress={toggleMenu}>
+          <FontAwesome name="user-circle" size={25} color="#fff" />
+        </TouchableOpacity>
+        {menuVisible && (
+          <View style={styles.dropdown}>
+            <TouchableOpacity onPress={() => setMenuVisible(false)} style={styles.dropdownItem}>
+              <Text style={styles.dropdownText}>Profile</Text>
+            </TouchableOpacity>
+            <View style={styles.separator} />
+            <TouchableOpacity onPress={logout} style={styles.dropdownItem}>
+              <Text style={styles.dropdownText}>Logout</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
       {menuVisible && (
-        <View style={styles.dropdown}>
-          <TouchableOpacity onPress={logout} style={styles.dropdownItem}>
-            <Text style={styles.dropdownText}>Sign Out</Text>
-          </TouchableOpacity>
-        </View>
+        <Modal transparent animationType="none" visible={menuVisible} onRequestClose={() => setMenuVisible(false)}>
+          <Pressable style={styles.overlay} onPress={() => setMenuVisible(false)} />
+        </Modal>
       )}
-    </View>
+    </>
   );
 }
 
@@ -55,4 +66,13 @@ const styles = StyleSheet.create({
   },
   dropdownItem: { padding: 12 },
   dropdownText: { color: '#fff', fontSize: 16 },
+  separator: { 
+    height: 1, 
+    backgroundColor: '#444', 
+    marginHorizontal: 12 
+  },
+  overlay: {
+    flex: 1,
+    backgroundColor: 'transparent',
+  },
 });

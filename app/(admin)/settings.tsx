@@ -1,5 +1,4 @@
-import { StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Switch, Alert } from 'react-native';
-import { Text, View } from '@/components/Themed';
+import { StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Switch, Alert, View, Text } from 'react-native';
 import { useState } from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
@@ -264,9 +263,11 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 20,
+    backgroundColor: 'transparent',
   },
   header: {
     marginBottom: 30,
+    backgroundColor: 'transparent',
   },
   title: {
     fontSize: 28,
@@ -281,6 +282,7 @@ const styles = StyleSheet.create({
   },
   section: {
     marginBottom: 30,
+    backgroundColor: 'transparent',
   },
   sectionTitle: {
     fontSize: 20,
@@ -292,6 +294,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+    backgroundColor: 'transparent',
   },
   infoCard: {
     backgroundColor: '#111',
@@ -326,6 +329,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#333',
+    backgroundColor: 'transparent',
   },
   settingIcon: {
     width: 40,
@@ -338,6 +342,7 @@ const styles = StyleSheet.create({
   },
   settingContent: {
     flex: 1,
+    backgroundColor: 'transparent',
   },
   settingTitle: {
     fontSize: 16,
@@ -362,6 +367,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#333',
+    backgroundColor: 'transparent',
   },
   actionIcon: {
     width: 40,
@@ -373,6 +379,7 @@ const styles = StyleSheet.create({
   },
   actionContent: {
     flex: 1,
+    backgroundColor: 'transparent',
   },
   actionTitle: {
     fontSize: 16,

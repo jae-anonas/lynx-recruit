@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, router, Tabs } from 'expo-router';
-import { Pressable } from 'react-native';
+import { router, Tabs } from 'expo-router';
 
-import Colors from '@/constants/Colors';
-import { useColorScheme } from '@/components/useColorScheme';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
 import AuthChecker from '@/components/AuthChecker';
 import DropdownMenu from '@/components/DropdownMenu';
@@ -28,14 +25,6 @@ export default function UserTabLayout() {
       router.replace('/');
     }
   });
-
-  const colorScheme = useColorScheme();
-
-  const [menuVisible, setMenuVisible] = useState(false);
-
-  const toggleMenu = () => {
-    setMenuVisible(!menuVisible);
-  };
 
   return (
     <AuthChecker>
@@ -72,6 +61,7 @@ export default function UserTabLayout() {
           options={{
             title: 'Surveyors',
             tabBarIcon: ({ color }) => <TabBarIcon name="users" color={color} />,
+            headerRight: () => <DropdownMenu />,
           }}
         />
         <Tabs.Screen
@@ -79,6 +69,7 @@ export default function UserTabLayout() {
           options={{
             title: 'Projects',
             tabBarIcon: ({ color }) => <TabBarIcon name="briefcase" color={color} />,
+            headerRight: () => <DropdownMenu />,
           }}
         />
         <Tabs.Screen
@@ -86,6 +77,7 @@ export default function UserTabLayout() {
           options={{
             title: 'Profile',
             tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
+            headerRight: () => <DropdownMenu />,
           }}
         />
       </Tabs>
