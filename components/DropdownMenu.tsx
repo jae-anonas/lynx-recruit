@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, View, Text, Modal, Pressable } from 'react-native';
-import { signOut } from 'firebase/auth';
-import { auth } from '@/firebaseConfig';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { router } from 'expo-router';
+import { useSession } from './SessionProvider';
 
 export default function DropdownMenu() {
   const [menuVisible, setMenuVisible] = useState(false);
+  const { signOut } = useSession();
 
   const toggleMenu = () => setMenuVisible((v) => !v);
 
@@ -14,17 +14,14 @@ export default function DropdownMenu() {
     setMenuVisible(false);
     try {
       console.log('Starting logout process...');
-      await signOut(auth);
+      
+      // Sign out using session context
+      await signOut();
       console.log('Logout successful, navigating to login');
       
-      // Navigate immediately without delay
-      console.log('Attempting navigation after logout...');
-      try {
-        router.replace('/');
-      } catch (error) {
-        console.log('Replace failed, trying push:', error);
-        router.push('/');
-      }
+      // Navigate to login - Stack.Protected will handle the rest
+      router.replace('/');
+      
     } catch (error) {
       console.error('Logout error:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';

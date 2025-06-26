@@ -6,10 +6,7 @@ import { Pressable } from 'react-native';
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
-import AuthChecker from '@/components/AuthChecker';
 import DropdownMenu from '@/components/DropdownMenu';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '@/firebaseConfig';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -20,17 +17,7 @@ function TabBarIcon(props: {
 }
 
 export default function TabLayout() {
-
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      alert('You are not logged in. Please log in to continue.');
-      // Redirect to the login page or home page
-      router.replace('/');
-    }
-  });
-
   const colorScheme = useColorScheme();
-
   const [menuVisible, setMenuVisible] = useState(false);
 
   const toggleMenu = () => {
@@ -38,8 +25,6 @@ export default function TabLayout() {
   };
 
   return (
-    <AuthChecker>
-
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
@@ -63,6 +48,5 @@ export default function TabLayout() {
         }}
       />
     </Tabs>
-    </AuthChecker>
   );
 }

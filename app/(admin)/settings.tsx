@@ -1,10 +1,11 @@
 import { StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Switch, Alert, View, Text } from 'react-native';
 import { useState } from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { signOut, getAuth } from 'firebase/auth';
 import { router } from 'expo-router';
+import { useSession } from '@/components/SessionProvider';
 
 export default function Settings() {
+  const { signOut } = useSession();
   const [settings, setSettings] = useState({
     emailNotifications: true,
     pushNotifications: false,
@@ -68,19 +69,16 @@ export default function Settings() {
           onPress: async () => {
             try {
               console.log('Admin logout starting...');
-              await signOut(getAuth());
+              
+              // Sign out using session context
+              await signOut();
               console.log('Admin logout successful, navigating to login');
               
-              // Navigate immediately without delay
-              console.log('Attempting navigation after logout...');
-              try {
-                router.replace('/');
-              } catch (error) {
-                console.log('Replace failed, trying push:', error);
-                router.push('/');
-              }
+              // Navigate to login - Stack.Protected will handle the rest
+              router.replace('/');
+              
             } catch (error) {
-              console.error('Sign out error:', error);
+              console.error('Logout error:', error);
               Alert.alert('Error', 'Failed to sign out. Please try again.');
             }
           },

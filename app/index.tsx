@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { auth } from '../firebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential } from 'firebase/auth';
 import { router } from 'expo-router';
+import { useSession } from '@/components/SessionProvider';
 
 const Index = () => {
   const [email, setEmail] = useState('');

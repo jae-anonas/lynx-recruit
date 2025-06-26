@@ -1,10 +1,11 @@
 import { StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, Image, Switch, Alert, View, Text } from 'react-native';
 import { useState, useEffect } from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { getAuth, signOut } from 'firebase/auth';
 import { router } from 'expo-router';
+import { useSession } from '@/components/SessionProvider';
 
 export default function UserProfile() {
+  const { signOut } = useSession();
   const [userInfo, setUserInfo] = useState({
     name: 'Alex Rodriguez',
     email: 'alex.rodriguez@example.com',
@@ -48,19 +49,16 @@ export default function UserProfile() {
           onPress: async () => {
             try {
               console.log('Profile logout starting...');
-              await signOut(getAuth());
+              
+              // Sign out using session context
+              await signOut();
               console.log('Profile logout successful, navigating to login');
               
-              // Navigate immediately without delay
-              console.log('Attempting navigation after logout...');
-              try {
-                router.replace('/');
-              } catch (error) {
-                console.log('Replace failed, trying push:', error);
-                router.push('/');
-              }
+              // Navigate to login - Stack.Protected will handle the rest
+              router.replace('/');
+              
             } catch (error) {
-              console.error('Sign out error:', error);
+              console.error('Logout error:', error);
               Alert.alert('Error', 'Failed to sign out. Please try again.');
             }
           },

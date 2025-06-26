@@ -3,7 +3,6 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
 
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
-import AuthChecker from '@/components/AuthChecker';
 import DropdownMenu from '@/components/DropdownMenu';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -16,8 +15,7 @@ function TabBarIcon(props: {
 
 export default function UserTabLayout() {
   return (
-    <AuthChecker>
-      <Tabs
+    <Tabs
         screenOptions={{
           tabBarActiveTintColor: '#00E5FF',
           tabBarInactiveTintColor: '#666',
@@ -70,6 +68,5 @@ export default function UserTabLayout() {
           }}
         />
       </Tabs>
-    </AuthChecker>
   );
 }
