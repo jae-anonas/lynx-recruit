@@ -1,6 +1,8 @@
 import { StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Switch, Alert, View, Text } from 'react-native';
 import { useState } from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { signOut, getAuth } from 'firebase/auth';
+import { router } from 'expo-router';
 
 export default function Settings() {
   const [settings, setSettings] = useState({
@@ -54,6 +56,39 @@ export default function Settings() {
     );
   };
 
+  const handleSignOut = () => {
+    Alert.alert(
+      'Sign Out',
+      'Are you sure you want to sign out of your admin account?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Sign Out',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              console.log('Admin logout starting...');
+              await signOut(getAuth());
+              console.log('Admin logout successful, navigating to login');
+              
+              // Navigate immediately without delay
+              console.log('Attempting navigation after logout...');
+              try {
+                router.replace('/');
+              } catch (error) {
+                console.log('Replace failed, trying push:', error);
+                router.push('/');
+              }
+            } catch (error) {
+              console.error('Sign out error:', error);
+              Alert.alert('Error', 'Failed to sign out. Please try again.');
+            }
+          },
+        },
+      ]
+    );
+  };
+
   const SettingItem = ({ 
     title, 
     subtitle, 
@@ -89,16 +124,18 @@ export default function Settings() {
     subtitle, 
     onPress, 
     icon, 
-    color = '#2196F3' 
+    color = '#2196F3',
+    danger = false
   }: { 
     title: string; 
     subtitle: string; 
     onPress: () => void; 
     icon: string; 
     color?: string;
+    danger?: boolean;
   }) => (
     <TouchableOpacity style={styles.actionButton} onPress={onPress}>
-      <View style={[styles.actionIcon, { backgroundColor: color }]}>
+      <View style={[styles.actionIcon, { backgroundColor: danger ? '#F44336' : color }]}>
         <FontAwesome name={icon as any} size={20} color="white" />
       </View>
       <View style={styles.actionContent}>
@@ -224,6 +261,13 @@ export default function Settings() {
               onPress={handleReset}
               icon="refresh"
               color="#F44336"
+            />
+            <ActionButton
+              title="Sign Out"
+              subtitle="Sign out of your admin account"
+              onPress={handleSignOut}
+              icon="sign-out"
+              danger={true}
             />
           </View>
         </View>

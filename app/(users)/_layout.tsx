@@ -22,12 +22,12 @@ export default function UserTabLayout() {
           tabBarActiveTintColor: '#00E5FF',
           tabBarInactiveTintColor: '#666',
           tabBarStyle: {
-            backgroundColor: '#111',
-            borderTopColor: '#333',
+            backgroundColor: '#0a0a0a',
+            borderTopColor: '#222',
             borderTopWidth: 1,
           },
           headerStyle: {
-            backgroundColor: '#111',
+            backgroundColor: '#0a0a0a',
           },
           headerTintColor: '#fff',
           headerTitleStyle: {

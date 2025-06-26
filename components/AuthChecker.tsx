@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
-import { router } from 'expo-router';
 
 type Props = {
   children: React.ReactNode;
@@ -20,13 +19,8 @@ export default function AuthChecker({ children }: Props) {
       setUser(currentUser);
       setLoading(false);
       
-      if (!currentUser) {
-        console.log('No user found, redirecting to login');
-        // Use a small delay to ensure state updates are complete
-        setTimeout(() => {
-          router.replace('/');
-        }, 100);
-      }
+      // Don't navigate here - just track the user state
+      // Let the logout functions handle navigation
     });
 
     return () => {
@@ -43,5 +37,11 @@ export default function AuthChecker({ children }: Props) {
     );
   }
 
-  return <>{user ? children : null}</>;
+  if (!user) {
+    // Don't render anything when there's no user
+    // This prevents navigation conflicts and remounting cycles
+    return null;
+  }
+
+  return <>{children}</>;
 }

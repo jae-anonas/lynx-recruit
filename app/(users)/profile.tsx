@@ -47,8 +47,18 @@ export default function UserProfile() {
           style: 'destructive',
           onPress: async () => {
             try {
+              console.log('Profile logout starting...');
               await signOut(getAuth());
-              router.replace('/');
+              console.log('Profile logout successful, navigating to login');
+              
+              // Navigate immediately without delay
+              console.log('Attempting navigation after logout...');
+              try {
+                router.replace('/');
+              } catch (error) {
+                console.log('Replace failed, trying push:', error);
+                router.push('/');
+              }
             } catch (error) {
               console.error('Sign out error:', error);
               Alert.alert('Error', 'Failed to sign out. Please try again.');

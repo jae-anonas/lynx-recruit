@@ -15,9 +15,16 @@ export default function DropdownMenu() {
     try {
       console.log('Starting logout process...');
       await signOut(auth);
-      console.log('Logout successful, auth state should change now');
-      // The AuthChecker component will handle the navigation automatically
-      // when onAuthStateChanged triggers with null user
+      console.log('Logout successful, navigating to login');
+      
+      // Navigate immediately without delay
+      console.log('Attempting navigation after logout...');
+      try {
+        router.replace('/');
+      } catch (error) {
+        console.log('Replace failed, trying push:', error);
+        router.push('/');
+      }
     } catch (error) {
       console.error('Logout error:', error);
       const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';

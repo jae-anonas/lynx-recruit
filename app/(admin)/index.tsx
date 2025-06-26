@@ -182,15 +182,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+    backgroundColor: 'transparent',
   },
   quickActionCard: {
-    backgroundColor: '#111',
+    backgroundColor: '#0a0a0a',
     padding: 20,
     borderRadius: 12,
     width: '48%',
     marginBottom: 15,
     borderWidth: 1,
-    borderColor: '#333',
+    borderColor: '#222',
     alignItems: 'center',
   },
   quickActionTitle: {
@@ -201,18 +202,20 @@ const styles = StyleSheet.create({
   },
   recentActivityContainer: {
     marginBottom: 20,
+    backgroundColor: 'transparent',
   },
   activityList: {
-    backgroundColor: '#111',
+    backgroundColor: '#0a0a0a',
     borderRadius: 12,
     padding: 15,
     borderWidth: 1,
-    borderColor: '#333',
+    borderColor: '#222',
   },
   activityItem: {
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#333',
+    borderBottomColor: '#222',
+    backgroundColor: 'transparent',
   },
   activityText: {
     fontSize: 14,
