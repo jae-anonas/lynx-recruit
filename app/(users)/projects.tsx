@@ -1,5 +1,4 @@
-import { StyleSheet, TouchableOpacity, SafeAreaView, FlatList, TextInput } from 'react-native';
-import { Text, View } from '@/components/Themed';
+import { StyleSheet, TouchableOpacity, SafeAreaView, FlatList, TextInput, Text, View } from 'react-native';
 import { useState, useEffect } from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
@@ -260,9 +259,9 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 20,
-    backgroundColor: '#111',
+    backgroundColor: 'transparent',
     borderBottomWidth: 1,
-    borderBottomColor: '#333',
+    borderBottomColor: '#222',
   },
   headerTitle: {
     fontSize: 24,
@@ -278,12 +277,12 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#222',
+    backgroundColor: '#0a0a0a',
     borderRadius: 10,
     paddingHorizontal: 15,
     marginBottom: 15,
     borderWidth: 1,
-    borderColor: '#333',
+    borderColor: '#222',
   },
   searchIcon: {
     marginRight: 10,
@@ -302,9 +301,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 8,
     borderRadius: 20,
-    backgroundColor: '#333',
+    backgroundColor: '#0a0a0a',
     borderWidth: 1,
-    borderColor: '#444',
+    borderColor: '#222',
   },
   filterButtonActive: {
     backgroundColor: '#00E5FF',
@@ -323,24 +322,27 @@ const styles = StyleSheet.create({
   },
   listContent: {
     padding: 20,
+    backgroundColor: 'transparent',
   },
   projectCard: {
-    backgroundColor: '#111',
+    backgroundColor: '#0a0a0a',
     borderRadius: 12,
     padding: 15,
     marginBottom: 15,
     borderWidth: 1,
-    borderColor: '#333',
+    borderColor: '#222',
   },
   cardHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     marginBottom: 15,
+    backgroundColor: 'transparent',
   },
   projectInfo: {
     flex: 1,
     marginRight: 10,
+    backgroundColor: 'transparent',
   },
   projectTitle: {
     fontSize: 18,
@@ -365,11 +367,13 @@ const styles = StyleSheet.create({
   },
   cardBody: {
     marginBottom: 15,
+    backgroundColor: 'transparent',
   },
   detailRow: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 8,
+    backgroundColor: 'transparent',
   },
   detailText: {
     fontSize: 14,
@@ -378,11 +382,13 @@ const styles = StyleSheet.create({
   },
   progressContainer: {
     marginBottom: 15,
+    backgroundColor: 'transparent',
   },
   progressHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 8,
+    backgroundColor: 'transparent',
   },
   progressLabel: {
     fontSize: 14,
@@ -395,7 +401,7 @@ const styles = StyleSheet.create({
   },
   progressBar: {
     height: 8,
-    backgroundColor: '#333',
+    backgroundColor: '#222',
     borderRadius: 4,
   },
   progressFill: {
@@ -407,7 +413,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingTop: 15,
     borderTopWidth: 1,
-    borderTopColor: '#333',
+    borderTopColor: '#222',
+    backgroundColor: 'transparent',
   },
   actionButton: {
     flexDirection: 'row',

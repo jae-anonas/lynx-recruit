@@ -1,5 +1,4 @@
-import { StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, Pressable } from 'react-native';
-import { Text, View } from '@/components/Themed';
+import { StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, Pressable, Text, View } from 'react-native';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { router } from 'expo-router';
 import { auth } from '@/firebaseConfig';
@@ -121,9 +120,11 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 20,
+    backgroundColor: 'transparent',
   },
   header: {
     marginBottom: 30,
+    backgroundColor: 'transparent',
   },
   title: {
     fontSize: 28,
@@ -138,6 +139,7 @@ const styles = StyleSheet.create({
   },
   statsContainer: {
     marginBottom: 30,
+    backgroundColor: 'transparent',
   },
   sectionTitle: {
     fontSize: 20,
@@ -149,16 +151,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+    backgroundColor: 'transparent',
   },
   statCard: {
-    backgroundColor: '#111',
+    backgroundColor: '#0a0a0a',
     padding: 20,
     borderRadius: 12,
     width: '48%',
     marginBottom: 15,
     borderLeftWidth: 4,
     borderWidth: 1,
-    borderColor: '#333',
+    borderColor: '#222',
   },
   statValue: {
     fontSize: 32,
@@ -173,6 +176,7 @@ const styles = StyleSheet.create({
   },
   quickActionsContainer: {
     marginBottom: 30,
+    backgroundColor: 'transparent',
   },
   quickActionsGrid: {
     flexDirection: 'row',

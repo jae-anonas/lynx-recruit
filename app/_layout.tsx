@@ -30,6 +30,14 @@ export default function RootLayout() {
     ...FontAwesome.font,
   });
 
+  // Global auth listener for debugging
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log('Root layout - Auth state changed:', user ? user.email : 'null');
+    });
+    return unsubscribe;
+  }, []);
+
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;

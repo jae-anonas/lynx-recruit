@@ -1,5 +1,4 @@
-import { StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, Pressable } from 'react-native';
-import { Text, View } from '@/components/Themed';
+import { StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, Pressable, View, Text } from 'react-native';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { router } from 'expo-router';
 import { auth } from '@/firebaseConfig';
@@ -145,9 +144,11 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: 20,
+    backgroundColor: 'transparent',
   },
   header: {
     marginBottom: 30,
+    backgroundColor: 'transparent',
   },
   title: {
     fontSize: 28,
@@ -162,6 +163,7 @@ const styles = StyleSheet.create({
   },
   statsContainer: {
     marginBottom: 30,
+    backgroundColor: 'transparent',
   },
   sectionTitle: {
     fontSize: 20,
@@ -173,16 +175,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+    backgroundColor: 'transparent',
   },
   statCard: {
-    backgroundColor: '#111',
+    backgroundColor: '#0a0a0a',
     padding: 20,
     borderRadius: 12,
     width: '48%',
     marginBottom: 15,
     borderLeftWidth: 4,
     borderWidth: 1,
-    borderColor: '#333',
+    borderColor: '#222',
   },
   statValue: {
     fontSize: 32,
@@ -197,20 +200,22 @@ const styles = StyleSheet.create({
   },
   quickActionsContainer: {
     marginBottom: 30,
+    backgroundColor: 'transparent',
   },
   quickActionsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
+    backgroundColor: 'transparent',
   },
   quickActionCard: {
-    backgroundColor: '#111',
+    backgroundColor: '#0a0a0a',
     padding: 20,
     borderRadius: 12,
     width: '48%',
     marginBottom: 15,
     borderWidth: 1,
-    borderColor: '#333',
+    borderColor: '#222',
     alignItems: 'center',
   },
   quickActionTitle: {
@@ -221,18 +226,20 @@ const styles = StyleSheet.create({
   },
   recentActivityContainer: {
     marginBottom: 30,
+    backgroundColor: 'transparent',
   },
   activityList: {
-    backgroundColor: '#111',
+    backgroundColor: '#0a0a0a',
     borderRadius: 12,
     padding: 15,
     borderWidth: 1,
-    borderColor: '#333',
+    borderColor: '#222',
   },
   activityItem: {
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#333',
+    borderBottomColor: '#222',
+    backgroundColor: 'transparent',
   },
   activityText: {
     fontSize: 14,
@@ -246,17 +253,19 @@ const styles = StyleSheet.create({
   },
   featuredSurveyorsContainer: {
     marginBottom: 20,
+    backgroundColor: 'transparent',
   },
   surveyorsList: {
     marginBottom: 15,
+    backgroundColor: 'transparent',
   },
   surveyorCard: {
-    backgroundColor: '#111',
+    backgroundColor: '#0a0a0a',
     padding: 15,
     borderRadius: 12,
     marginBottom: 10,
     borderWidth: 1,
-    borderColor: '#333',
+    borderColor: '#222',
   },
   surveyorName: {
     fontSize: 16,

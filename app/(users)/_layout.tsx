@@ -1,12 +1,10 @@
 import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { router, Tabs } from 'expo-router';
+import { Tabs } from 'expo-router';
 
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
 import AuthChecker from '@/components/AuthChecker';
 import DropdownMenu from '@/components/DropdownMenu';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '@/firebaseConfig';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -17,15 +15,6 @@ function TabBarIcon(props: {
 }
 
 export default function UserTabLayout() {
-
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      alert('You are not logged in. Please log in to continue.');
-      // Redirect to the login page or home page
-      router.replace('/');
-    }
-  });
-
   return (
     <AuthChecker>
       <Tabs

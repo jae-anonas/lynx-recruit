@@ -1,5 +1,4 @@
-import { StyleSheet, TouchableOpacity, Image, SafeAreaView, FlatList, TextInput } from 'react-native';
-import { Text, View } from '@/components/Themed';
+import { StyleSheet, TouchableOpacity, Image, SafeAreaView, FlatList, TextInput, View, Text } from 'react-native';
 import { router } from 'expo-router';
 import { useState, useEffect } from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
@@ -236,11 +235,11 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#222',
+    backgroundColor: '#0a0a0a',
     borderRadius: 10,
     paddingHorizontal: 15,
     borderWidth: 1,
-    borderColor: '#333',
+    borderColor: '#222',
   },
   searchIcon: {
     marginRight: 10,
@@ -256,19 +255,21 @@ const styles = StyleSheet.create({
   },
   listContent: {
     padding: 20,
+    backgroundColor: 'transparent',
   },
   surveyorCard: {
-    backgroundColor: '#111',
+    backgroundColor: '#0a0a0a',
     borderRadius: 12,
     padding: 15,
     marginBottom: 15,
     borderWidth: 1,
-    borderColor: '#333',
+    borderColor: '#222',
   },
   cardHeader: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     marginBottom: 15,
+    backgroundColor: 'transparent',
   },
   avatar: {
     width: 60,
@@ -278,6 +279,7 @@ const styles = StyleSheet.create({
   },
   surveyorInfo: {
     flex: 1,
+    backgroundColor: 'transparent',
   },
   name: {
     fontSize: 18,
@@ -297,6 +299,7 @@ const styles = StyleSheet.create({
   availabilityContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'transparent',
   },
   availabilityDot: {
     width: 8,
@@ -310,11 +313,13 @@ const styles = StyleSheet.create({
   },
   cardBody: {
     marginBottom: 15,
+    backgroundColor: 'transparent',
   },
   detailRow: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 8,
+    backgroundColor: 'transparent',
   },
   detailText: {
     fontSize: 14,
@@ -332,7 +337,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 15,
     borderTopWidth: 1,
-    borderTopColor: '#333',
+    borderTopColor: '#222',
+    backgroundColor: 'transparent',
   },
   hourlyRate: {
     fontSize: 16,

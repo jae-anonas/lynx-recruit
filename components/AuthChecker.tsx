@@ -14,16 +14,25 @@ export default function AuthChecker({ children }: Props) {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
+    console.log('AuthChecker mounted, setting up auth listener');
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (!currentUser) {
-        router.replace('/');
-      } else {
-        setUser(currentUser);
-      }
+      console.log('Auth state changed, user:', currentUser ? currentUser.email : 'null');
+      setUser(currentUser);
       setLoading(false);
+      
+      if (!currentUser) {
+        console.log('No user found, redirecting to login');
+        // Use a small delay to ensure state updates are complete
+        setTimeout(() => {
+          router.replace('/');
+        }, 100);
+      }
     });
 
-    return unsubscribe;
+    return () => {
+      console.log('AuthChecker unmounting, cleaning up auth listener');
+      unsubscribe();
+    };
   }, []);
 
   if (loading) {

@@ -51,6 +51,7 @@ export default function UserProfile() {
               router.replace('/');
             } catch (error) {
               console.error('Sign out error:', error);
+              Alert.alert('Error', 'Failed to sign out. Please try again.');
             }
           },
         },

@@ -10,15 +10,19 @@ export default function DropdownMenu() {
 
   const toggleMenu = () => setMenuVisible((v) => !v);
 
-  const logout = () => {
-    signOut(auth)
-      .then(() => {
-        alert('Successful logout!');
-        setMenuVisible(false);
-        // Redirect to the login page or home page
-        router.replace('/');
-      })
-      .catch((error) => alert('Error: ' + error.message));
+  const logout = async () => {
+    setMenuVisible(false);
+    try {
+      console.log('Starting logout process...');
+      await signOut(auth);
+      console.log('Logout successful, auth state should change now');
+      // The AuthChecker component will handle the navigation automatically
+      // when onAuthStateChanged triggers with null user
+    } catch (error) {
+      console.error('Logout error:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+      alert('Error signing out: ' + errorMessage);
+    }
   };
 
   return (
