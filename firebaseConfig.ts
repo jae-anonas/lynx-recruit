@@ -1,7 +1,8 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getReactNativePersistence, initializeAuth, Persistence } from "firebase/auth";
+import { getReactNativePersistence, initializeAuth, Persistence, getAuth } from "firebase/auth";
+import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 declare module "firebase/auth" {
@@ -25,10 +26,32 @@ const firebaseConfig = {
     measurementId: "G-ZS1XXZW8XZ"
   };
   
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase app (avoid duplicate initialization)
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
-export const auth = initializeAuth(app, {
-  persistence: getReactNativePersistence(AsyncStorage),
-});
+// Initialize Auth
+let auth: any = null;
+try {
+  auth = getAuth(app);
+  // Only initialize auth if not already initialized
+  if (!auth._delegate) {
+    auth = initializeAuth(app, {
+      persistence: getReactNativePersistence(AsyncStorage),
+    });
+  }
+} catch (error) {
+  console.log('Auth already initialized or error:', error);
+  auth = getAuth(app);
+}
+
+// Initialize Firestore with error handling
+let db: any = null;
+try {
+  db = getFirestore(app);
+  console.log('Firestore initialized successfully');
+} catch (error) {
+  console.error('Error initializing Firestore:', error);
+}
+
+export { auth, db };
 // const analytics = getAnalytics(app);

@@ -1,6 +1,9 @@
 import { StyleSheet, TouchableOpacity, SafeAreaView, FlatList, TextInput, Alert, View, Text } from 'react-native';
 import { useState, useEffect } from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { collection, getDocs, doc, updateDoc, deleteDoc, onSnapshot, query, orderBy } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
+import AddUserModal from './AddUser';
 
 interface User {
   id: string;
@@ -9,6 +12,9 @@ interface User {
   role: 'admin' | 'surveyor' | 'user';
   status: 'active' | 'inactive' | 'pending';
   joinDate: string;
+  phone?: string;
+  company?: string;
+  location?: string;
 }
 
 export default function ManageUsers() {
@@ -16,9 +22,59 @@ export default function ManageUsers() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'admin' | 'surveyor' | 'user'>('all');
+  const [addUserModalVisible, setAddUserModalVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Mock data - replace with actual API calls
+    // Set up real-time listener for users collection with error handling
+    if (!db) {
+      console.log('Firebase not available, using mock data');
+      loadMockData();
+      return;
+    }
+
+    try {
+      const usersQuery = query(collection(db, 'users'), orderBy('createdAt', 'desc'));
+      
+      const unsubscribe = onSnapshot(usersQuery, 
+        (snapshot) => {
+          const usersData: User[] = [];
+          snapshot.forEach((doc) => {
+            const data = doc.data();
+            usersData.push({
+              id: doc.id,
+              name: data.name || '',
+              email: data.email || '',
+              role: data.role || 'user',
+              status: data.status || 'active',
+              joinDate: data.joinDate?.toDate ? data.joinDate.toDate().toISOString().split('T')[0] : data.joinDate || '',
+              phone: data.phone || '',
+              company: data.company || '',
+              location: data.location || '',
+            });
+          });
+          setUsers(usersData);
+          setLoading(false);
+        },
+        (error) => {
+          console.error('Error fetching users:', error);
+          // Fallback to mock data if Firebase fails
+          loadMockData();
+          setLoading(false);
+        }
+      );
+
+      return () => unsubscribe();
+    } catch (error) {
+      console.error('Error setting up Firebase listener:', error);
+      // Fallback to mock data if Firebase setup fails
+      loadMockData();
+      setLoading(false);
+    }
+  }, []);
+
+  const loadMockData = () => {
+    // Mock data fallback - for development/testing
     const mockUsers: User[] = [
       {
         id: '1',
@@ -27,6 +83,9 @@ export default function ManageUsers() {
         role: 'surveyor',
         status: 'active',
         joinDate: '2024-01-15',
+        phone: '+64 21 456 789',
+        company: 'Thompson Surveying Ltd',
+        location: 'Auckland, New Zealand',
       },
       {
         id: '2',
@@ -35,6 +94,9 @@ export default function ManageUsers() {
         role: 'admin',
         status: 'active',
         joinDate: '2023-12-01',
+        phone: '+64 21 987 654',
+        company: 'QS Mate',
+        location: 'Wellington, New Zealand',
       },
       {
         id: '3',
@@ -43,6 +105,9 @@ export default function ManageUsers() {
         role: 'user',
         status: 'pending',
         joinDate: '2024-06-20',
+        phone: '+64 21 234 567',
+        company: 'Mitchell Construction',
+        location: 'Christchurch, New Zealand',
       },
       {
         id: '4',
@@ -51,11 +116,14 @@ export default function ManageUsers() {
         role: 'surveyor',
         status: 'inactive',
         joinDate: '2024-03-10',
+        phone: '+64 21 876 543',
+        company: 'Johnson & Associates',
+        location: 'Hamilton, New Zealand',
       },
     ];
     setUsers(mockUsers);
     setFilteredUsers(mockUsers);
-  }, []);
+  };
 
   useEffect(() => {
     let filtered = users;
@@ -76,7 +144,7 @@ export default function ManageUsers() {
     setFilteredUsers(filtered);
   }, [users, searchQuery, selectedFilter]);
 
-  const handleUserAction = (userId: string, action: 'activate' | 'deactivate' | 'delete') => {
+  const handleUserAction = async (userId: string, action: 'activate' | 'deactivate' | 'delete') => {
     Alert.alert(
       'Confirm Action',
       `Are you sure you want to ${action} this user?`,
@@ -84,21 +152,50 @@ export default function ManageUsers() {
         { text: 'Cancel', style: 'cancel' },
         {
           text: 'Confirm',
-          onPress: () => {
-            setUsers(prevUsers =>
-              prevUsers.map(user =>
-                user.id === userId
-                  ? { 
-                      ...user, 
-                      status: action === 'activate' ? 'active' : action === 'deactivate' ? 'inactive' : user.status 
-                    }
-                  : user
-              ).filter(user => action !== 'delete' || user.id !== userId)
-            );
+          onPress: async () => {
+            try {
+              if (!db) {
+                throw new Error('Database not initialized');
+              }
+              
+              if (action === 'delete') {
+                await deleteDoc(doc(db, 'users', userId));
+              } else {
+                const newStatus = action === 'activate' ? 'active' : 'inactive';
+                await updateDoc(doc(db, 'users', userId), {
+                  status: newStatus,
+                  updatedAt: new Date(),
+                });
+              }
+            } catch (error) {
+              console.error(`Error ${action}ing user:`, error);
+              Alert.alert('Error', `Failed to ${action} user. Please try again.`);
+              
+              // If Firebase fails, update locally for mock data
+              if (error instanceof Error && error.message.includes('Database not initialized')) {
+                setUsers(prevUsers => {
+                  if (action === 'delete') {
+                    return prevUsers.filter(user => user.id !== userId);
+                  } else {
+                    return prevUsers.map(user =>
+                      user.id === userId
+                        ? { ...user, status: action === 'activate' ? 'active' : 'inactive' }
+                        : user
+                    );
+                  }
+                });
+              }
+            }
           },
         },
       ]
     );
+  };
+
+  const handleUserAdded = () => {
+    // Users will be automatically updated via the real-time listener if Firebase is available
+    // If Firebase is not available, this will be handled by the modal's fallback logic
+    console.log('User added successfully');
   };
 
   const getStatusColor = (status: string) => {
@@ -188,13 +285,12 @@ export default function ManageUsers() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>Manage Users</Text>
-        
         <View style={styles.searchContainer}>
           <FontAwesome name="search" size={20} color="#666" style={styles.searchIcon} />
           <TextInput
             style={styles.searchInput}
             placeholder="Search users..."
+            placeholderTextColor="#666"
             value={searchQuery}
             onChangeText={setSearchQuery}
           />
@@ -216,9 +312,18 @@ export default function ManageUsers() {
         showsVerticalScrollIndicator={false}
       />
 
-      <TouchableOpacity style={styles.addButton}>
+      <TouchableOpacity 
+        style={styles.addButton}
+        onPress={() => setAddUserModalVisible(true)}
+      >
         <FontAwesome name="plus" size={24} color="white" />
       </TouchableOpacity>
+
+      <AddUserModal
+        visible={addUserModalVisible}
+        onClose={() => setAddUserModalVisible(false)}
+        onUserAdded={handleUserAdded}
+      />
     </SafeAreaView>
   );
 }
@@ -233,12 +338,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#111',
     borderBottomWidth: 1,
     borderBottomColor: '#333',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#fff',
   },
   searchContainer: {
     flexDirection: 'row',
