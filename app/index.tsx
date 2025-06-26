@@ -1,7 +1,7 @@
 import { View, Text, SafeAreaView, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import React, { useState } from 'react';
 import { auth } from '../firebaseConfig';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential } from 'firebase/auth';
 import { router } from 'expo-router';
 
 const Index = () => {
@@ -11,7 +11,7 @@ const Index = () => {
   const signIn = async () => {
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
-      if (user) router.replace('/(tabs)');
+      routeUser(user);
     } catch (error: any) {
       alert('Sign in failed: ' + error.message);
     }
@@ -20,9 +20,17 @@ const Index = () => {
   const signUp = async () => {
     try {
       const user = await createUserWithEmailAndPassword(auth, email, password);
-      if (user) router.replace('/(tabs)');
+      routeUser(user);
     } catch (error: any) {
       alert('Sign up failed: ' + error.message);
+    }
+  };
+
+  const routeUser = (user: UserCredential) => {
+    if (user && user.user.email === 'jae.anonas@gmail.com') {
+      router.replace('/(admin)');
+    } else {
+      router.replace('/(tabs)');
     }
   };
 
