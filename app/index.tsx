@@ -1,13 +1,19 @@
-import { View, Text, SafeAreaView, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, SafeAreaView, TextInput, TouchableOpacity, StyleSheet, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import React, { useState } from 'react';
 import { auth } from '../firebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential } from 'firebase/auth';
 import { router } from 'expo-router';
 import { useSession } from '@/components/SessionProvider';
+import { useFonts } from 'expo-font';
 
 const Index = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [fontsLoaded] = useFonts({
+    'Pacifico-Regular': require('../assets/fonts/SpaceMono-Regular.ttf'), // Replace with your fancy font file
+  });
+
+  if (!fontsLoaded) return null;
 
   const signIn = async () => {
     try {
@@ -42,38 +48,48 @@ const Index = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Image
-        source={require('../assets/qs-mate-logo.png')}
-        style={styles.logo}
-      />
-      <Text style={styles.title}>QS Mate</Text>
+      <KeyboardAvoidingView
+        style={{ flex: 1, width: '100%', justifyContent: 'flex-start', alignItems: 'center' }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+      >
+        <View style={{ width: '100%', marginTop: 48 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: '100%', marginBottom: 30 }}>
+            <Image
+              source={require('../assets/qs-mate-logo.png')}
+              style={[styles.logo, { width: 120, height: 120, marginRight: 24 }]}
+            />
+            <Text style={[styles.title, { marginBottom: 0, fontFamily: 'Pacifico-Regular', fontSize: 40 }]}>QS Mate</Text>
+          </View>
 
-      <View style={styles.inputsContainer}>
-        <TextInput
-          placeholder="Email"
-          placeholderTextColor="#aaa"
-          onChangeText={setEmail}
-          value={email}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Password"
-          placeholderTextColor="#aaa"
-          onChangeText={setPassword}
-          value={password}
-          secureTextEntry
-          style={styles.input}
-        />
-      </View>
+          <View style={styles.inputsContainer}>
+            <TextInput
+              placeholder="Email"
+              placeholderTextColor="#aaa"
+              onChangeText={setEmail}
+              value={email}
+              style={styles.input}
+            />
+            <TextInput
+              placeholder="Password"
+              placeholderTextColor="#aaa"
+              onChangeText={setPassword}
+              value={password}
+              secureTextEntry
+              style={styles.input}
+            />
+          </View>
 
-      <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.signUpButton} onPress={signUp}>
-          <Text style={styles.signUpText}>Sign Up</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.loginButton} onPress={signIn}>
-          <Text style={styles.loginText}>Log In</Text>
-        </TouchableOpacity>
-      </View>
+          <View style={styles.buttonsContainer}>
+            <TouchableOpacity style={styles.signUpButton} onPress={signUp}>
+              <Text style={styles.signUpText}>Sign Up</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.loginButton} onPress={signIn}>
+              <Text style={styles.loginText}>Log In</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };

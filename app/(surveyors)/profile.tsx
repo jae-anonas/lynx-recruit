@@ -7,10 +7,10 @@ import { useSession } from '@/components/SessionProvider';
 export default function SurveyorProfile() {
   const { signOut } = useSession();
   const [userInfo, setUserInfo] = useState({
-    name: 'Ben Richardson',
-    email: 'ben.richardson@example.co.nz',
-    phone: '+64 21 789 456',
-    company: 'Richardson Surveying Ltd.',
+    name: 'Jae Anonas',
+    email: 'jae.anonas@gmail.com',
+    phone: '+64 20 479 3040',
+    company: 'Lynx Recruitment',
     location: 'Auckland, New Zealand',
     joinDate: 'March 2023',
     licenseNumber: 'QS-NZ-2019-1847',

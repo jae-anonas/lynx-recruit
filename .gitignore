@@ -35,3 +35,8 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+docs/booking-system-implementation.md
+docs/firebase-collections-schema.md
+docs/firebase-setup.md
+docs/implementation-steps.md
+docs/project-posting-implementation.md

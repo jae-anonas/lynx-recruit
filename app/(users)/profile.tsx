@@ -7,10 +7,10 @@ import { useSession } from '@/components/SessionProvider';
 export default function UserProfile() {
   const { signOut } = useSession();
   const [userInfo, setUserInfo] = useState({
-    name: 'James Patterson',
-    email: 'james.patterson@example.co.nz',
-    phone: '+64 21 456 789',
-    company: 'Patterson Building Ltd.',
+    name: 'Jae Anonas',
+    email: 'jae.anonas@gmail.com',
+    phone: '+64 20 479 3040',
+    company: 'Lynx Recruitment',
     location: 'Auckland, New Zealand',
     joinDate: 'January 2024',
     avatar: require('@/assets/images/avatar1.jpg'),
